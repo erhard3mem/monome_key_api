@@ -3,7 +3,9 @@
 
 import asyncio
 import monome
-import vlc
+import subprocess
+# do not forget install mpg123 on the system (sudo apt install mpg123)
+
 
 class GridStudies(monome.GridApp):
     def __init__(self):
@@ -56,9 +58,8 @@ class GridStudies(monome.GridApp):
 
     def trigger(self, i):
         print("triggered", i)
-        if(i<9 and i>=1):
-            p = vlc.MediaPlayer("file:///home/erhard/web/monomegrid/"+str(i)+".mp3")    
-            p.play()
+        subprocess.Popen(['mpg123', '-q', '/home/erhard/web/monomegrid/'+str(i)+'.mp3'])#.wait()
+        
 
     def draw(self):
         buffer = monome.GridBuffer(self.width, self.height)
